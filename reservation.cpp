@@ -1,4 +1,5 @@
 #include "reservation.hpp"
+#include "utils/utility.hpp" 
 
 //Constructor
 Reservations::Reservations(){
@@ -10,6 +11,11 @@ Reservations::Reservations(){
 void Reservations::setFirst(Reservation* p){
 	first = p;
 }
+// agrege estaba declarada en reservatio.hpp
+Reservation* Reservations::getFirst() {
+    return first;
+}
+
 
 bool Reservations::full(){
 	Reservation* p;
@@ -64,3 +70,32 @@ bool Reservations::createReservation(int table, int qty, string name, string dni
 		}
 	}
 }
+
+
+
+// Buscar reservacion por cedula
+Reservation* Reservations::searchReservationByDni(const string& dni, Reservation* start) {
+    Reservation* p = start;
+    while (p != nullptr) {
+        if (p->getDni() == dni) {
+            return p;
+        }
+        p = p->next;
+    }
+    return nullptr;
+}
+
+
+// Contar Reservaciones
+int Reservations::getCount() {
+    int cnt = 0;
+    Reservation* p = getFirst();
+    while (p != nullptr) {
+        ++cnt;
+        p = p->getNext();
+    }
+    return cnt;
+}
+
+
+
