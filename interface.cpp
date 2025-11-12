@@ -1,5 +1,5 @@
 #include "interface.hpp"
-#include "reservation.hpp"   // para usar Reservation y Reservations
+#include "reservation.hpp"
 #include "utils/utility.hpp"
 
 #include <limits>
