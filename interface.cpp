@@ -219,27 +219,27 @@ void CmdInterface::updateFunction() {
 	string searchDate, name, dni, day;
 	char continueVar = 's';
 	Reservation* resultSearch;
-    bool resultUpdate;
+	bool resultUpdate;
 
-    while(continueVar == 's' || continueVar == 'S') {
-        cout << "Ingrese la mesa reservacion a actualizar: ";
-        cin >> searchTable;
-        cin.ignore();
-        cout << "\nIngrese el dia de la reservacion a actualizar: ";
-        getline(cin, searchDate);
-        resultSearch = list1.findReservationByDate(searchTable, searchDate);
-        if(resultSearch == nullptr) {
-            cout << "La reservacion buscada no existe" << endl;
-            cout << "¿Desea continuar? (s/n) " << endl;
-            cin >> continueVar;
-            cin.ignore();
-            if (continueVar == 'n' || continueVar == 'N') {
-                break;
-            }
-            continue;
-        }
-        break;
-    }
+	while(continueVar == 's' || continueVar == 'S') {
+	cout << "Ingrese la mesa reservacion a actualizar: ";
+	cin >> searchTable;
+	cin.ignore();
+	cout << "\nIngrese el dia de la reservacion a actualizar: ";
+	getline(cin, searchDate);
+	resultSearch = list1.findReservationByDate(searchTable, searchDate);
+	if(resultSearch == nullptr) {
+	cout << "La reservacion buscada no existe" << endl;
+	cout << "¿Desea continuar? (s/n) " << endl;
+	cin >> continueVar;
+	cin.ignore();
+	if (continueVar == 'n' || continueVar == 'N') {
+	    break;
+	}
+	    continue;
+	}
+	break;
+	}
 
     while(continueVar == 's' || continueVar == 'S') {
         cout << "Reservacion encontrada!" << endl;
@@ -256,27 +256,27 @@ void CmdInterface::updateFunction() {
     	switch(selectionVar) {
     		case 1: { // Date and Table Update
     			table = readIntegers("Numero de mesa: ", 1, tables);
-		    	day = readValidDay("Dia de la reserva (Lunes-Viernes): ");
-		    	name = resultSearch->getName();
-		    	dni = resultSearch->getDni();
-		    	peopleQty = resultSearch->getQty();
-		    	
-		    	if(!list1.updateReservation(resultSearch, table, peopleQty, name, dni, day)) {
-		    		cout << "Error: Ya existe una reserva para esa mesa en ese dia. "<< endl;
-				} else {
-					cout << "Actualizacion exitosa!" << endl;
-				}
+			day = readValidDay("Dia de la reserva (Lunes-Viernes): ");
+			name = resultSearch->getName();
+			dni = resultSearch->getDni();
+			peopleQty = resultSearch->getQty();
+			resultUpdate = list1.updateReservation(resultSearch, table, peopleQty, name, dni, day);	
+			if(!resultUpdate) {
+				cout << "Error: Ya existe una reserva para esa mesa en ese dia. "<< endl;
+			} else {
+				cout << "Actualizacion exitosa!" << endl;
+			}
 				break;
 			}
 			case 2: { // Name and DNI Update
-				name = readAlphaString("Nombre del cliente: ");
-		    	dni = readDNI("Cedula del cliente (8 digitos): ");
-		    	table = resultSearch->getTable();
-		    	peopleQty = resultSearch->getQty();
-				day = resultSearch->getDate();
-				
-		    	if(list1.updateReservation(resultSearch, table, peopleQty, name, dni, day)) {
-		    		cout << "Actualizacion exitosa!" << endl;
+			name = readAlphaString("Nombre del cliente: ");
+			dni = readDNI("Cedula del cliente (8 digitos): ");
+			table = resultSearch->getTable();
+			peopleQty = resultSearch->getQty();
+			day = resultSearch->getDate();
+			resultUpdate = list1.updateReservation(resultSearch, table, peopleQty, name, dni, day);	
+			if(resultUpdate) {
+				cout << "Actualizacion exitosa!" << endl;
 				} else {
 					cout << "Ha surgido un error "<< endl;
 				}
@@ -286,11 +286,11 @@ void CmdInterface::updateFunction() {
 				table = resultSearch->getTable();
 				peopleQty = readIntegers("Cantidad de personas (1-8): ", 1, 8);
 				name = resultSearch->getName();
-		    	dni = resultSearch->getDni();
-		    	day = resultSearch->getDate();
-				
-				if(list1.updateReservation(resultSearch, table, peopleQty, name, dni, day)) {
-		    		cout << "Actualizacion exitosa!" << endl;
+				dni = resultSearch->getDni();
+				day = resultSearch->getDate();	
+				resultUpdate = list1.updateReservation(resultSearch, table, peopleQty, name, dni, day);	
+				if(resultUpdate) {
+				cout << "Actualizacion exitosa!" << endl;
 				} else {
 					cout << "Ha surgido un error "<< endl;
 				}
@@ -298,13 +298,13 @@ void CmdInterface::updateFunction() {
 			}
 			case 4: { // Update all
 				table = readIntegers("Numero de mesa: ", 1, tables);
-		    	name = readAlphaString("Nombre del cliente: ");
-		    	dni = readDNI("Cedula del cliente (8 digitos): ");
-		    	day = readValidDay("Dia de la reserva (Lunes-Viernes): ");
-		    	peopleQty = readIntegers("Cantidad de personas (1-8): ", 1, 8);
-		    	
-		    	if(!list1.updateReservation(resultSearch, table, peopleQty, name, dni, day)) {
-		    		cout << "Error: Ya existe una reserva para esa mesa en ese dia. "<< endl;
+				name = readAlphaString("Nombre del cliente: ");
+				dni = readDNI("Cedula del cliente (8 digitos): ");
+				day = readValidDay("Dia de la reserva (Lunes-Viernes): ");
+				peopleQty = readIntegers("Cantidad de personas (1-8): ", 1, 8);
+				resultUpdate = list1.updateReservation(resultSearch, table, peopleQty, name, dni, day);	
+				if(!resultUpdate) {
+				cout << "Error: Ya existe una reserva para esa mesa en ese dia. "<< endl;
 				} else {
 					cout << "Actualizacion exitosa!" << endl;
 				}
