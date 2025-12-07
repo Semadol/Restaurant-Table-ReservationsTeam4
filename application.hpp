@@ -16,6 +16,8 @@ class Application {
 		void setQtyTables (int qty);
 		int getQtyTables();
 		void configQtyTables();
+
+		bool createReservation(int table, int qty, const std::string& name, const std::string& dni, const std::string& day);
 		void updateFunction(Reservations& reservationList);
 		void deleteFunction(Reservations& reservationList, Reservations& cancelledList);
 		void showCancelledReservations(Reservations& cancelledList);
