@@ -168,8 +168,8 @@ void CmdInterface::processChoice(int choice) {
 		    while (p != nullptr) {
 		        cout << "----------Reservacion------------" << endl;
 		        cout << "Numero de mesa: " << p->getTable() << endl;
-		        cout << "Nombre del cliente: " << p->getName() << endl;
-		        cout << "Cedula del cliente: " << p->getDni() << endl;
+		        cout << "Nombre del Cliente: " << p->getName() << endl;
+		        cout << "Cedula del Cliente: " << p->getDni() << endl;
 		        cout << "Dia de la reserva: " << p->getDate() << endl;
 		        cout << "Cantidad de personas: " << p->getQty() << endl;
 		        p = p->getNext();
